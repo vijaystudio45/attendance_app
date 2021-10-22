@@ -1,0 +1,139 @@
+.messages {
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 14px;
+    text-align: center;
+    width: 80%;
+    height: 20px;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+.messages .success {
+    background-color: #0080006b;
+    padding: 15px 0;
+    border-radius: 6px;
+}
+
+.messages.error {
+	background-color: red;
+}
+
+ul.error {
+    display: flex;
+    margin: 8px 0;
+    padding: 15px 33px;
+    border-radius: 6px;
+    background: #ff00001c;
+}
+ul.error li {
+    margin: 0 5px;
+
+}
+li {
+    list-style: none;
+}
+ul {
+    padding: 0;
+}
+
+form#login_form {
+    padding: 0 65px;
+}
+.toast-success
+{
+	background-color:#51a351 !important;
+}
+.toast-error
+{
+	background-color:#bd362f !important;
+	font-size:14px !important;
+	color:#fff !important;
+	font-weight:500 !important;
+}
+.messages .success {
+    background-color: #51a351;
+    padding: 15px 0;
+    border-radius: 6px;
+}
+
+.m--align-left {
+    padding-top: 19px;
+}
+
+.agree {
+    padding-left: 0 !important;
+    margin-left: -8px !important;
+}
+.m-stack__item.m-stack__item--middle.m-brand__logo img {
+    width: 156px;
+    height: auto;
+}
+div#circle {
+    width: 60px;
+    height: 60px;
+    background: #d52d2f;
+    border-radius: 50%;
+}
+.user_first_chr {
+    padding: 9px 9px;
+    color: #fff;
+}
+.email_div.mt-2 span p {
+    white-space: nowrap;
+    width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    margin: 0px !important;
+}
+a.logout-btn {
+    background-color: #d52d2f;
+    color: #fff;
+    border-radius: 26px;
+    padding: 7px 24px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-family: Poppins;
+}
+a.logout-btn:hover {
+    color: #fff;
+    text-decoration: none!important;
+}
+
+ul.messages .error {
+    background: #bd362f;
+    padding: 13px 0;
+}
+
+.logo_change_password {
+    margin: 49px 0;
+}
+h3.m-login__title.add_title_reset {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #9e97aa;
+    margin-bottom: 34px;
+}
+.reset_button_sec {
+    text-align: center;
+    margin-top: 12px;
+}
+form#password-match {
+    padding: 0 81px;
+}
+form#telnyx_api_form {
+    margin-bottom: 29px;
+}
+
+img.test_img_logo {
+    width: 67%;
+    height: 66px;
+    background-color: #d52d2f;
+    border-radius: 13px;
+}

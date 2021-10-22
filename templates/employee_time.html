@@ -1,0 +1,66 @@
+{% extends 'inner-partials.html' %}
+{% load static %}
+{% block body %}
+<style>
+	.main_section.col-xs-12.col-sm-12.col-md-12 {
+		width: 93%;
+		background: #fff;
+		padding: 50px;
+		margin: 47px 33px;
+	}
+	a.btn.btn-info.btn-lg.add-offline-plus.add_representative_new_div {
+		height: 33px;
+		width: 20px;
+	}
+	.main_start_btn_sec {
+    margin-top: 24px;
+    text-align: center;
+    padding: 0 5px;
+}
+button#start_date_btn {
+    margin: 0 22px;
+}
+button#end_date_btn {
+    margin: 0 22px;
+}
+</style>
+<!-- begin:: Page -->
+	<div class="container">
+		<div class="main_section col-xs-12 col-sm-12 col-md-12">
+		<div class="main-div">
+			<div class="panel-heading mb-3">
+				<h3 class="panel-title text-center">Ensure Attendance</h3>
+			</div>
+                {% csrf_token %}
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8 main_start_btn_sec">
+					<div class="form-group">
+
+						{% if add == None and test2 == None %}
+						    <label for="Phone">Start date time:</label>
+							<button id="start_date_btn" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+								Start Date
+							</button>
+						{% endif %}
+					</div>
+				 </div>
+			</div>
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				<div class="col-md-8 main_start_btn_sec">
+				<div class="form-group">
+					{% if add and test2 == None %}
+					   <label for="password">End date time:</label>
+                        <button id="end_date_btn" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                            End date
+                        </button>
+					{% endif  %}
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+<!-- end:: Page -->
+{% endblock %}

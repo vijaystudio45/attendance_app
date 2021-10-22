@@ -1,0 +1,88 @@
+{% extends 'inner-partials.html' %}
+{% load static %}
+{% block body %}
+<style>
+	.main_section.col-xs-12.col-sm-12.col-md-12 {
+		width: 93%;
+		background: #fff;
+		padding: 50px;
+		margin: 47px 33px;
+	}
+	a.btn.btn-info.btn-lg.add-offline-plus.add_representative_new_div {
+		height: 33px;
+		width: 20px;
+	}
+</style>
+<!-- begin:: Page -->
+	<div class="container">
+		<div class="main_section col-xs-12 col-sm-12 col-md-12">
+		<div class="main-div">
+			<div class="panel-heading mb-3">
+				<h3 class="panel-title text-center">Registeration <!-- <small>It's free!</small> --></h3>
+			</div>
+			<form id="employee_register_form" class="m-login__form m-form" action="{{ url }}employee-register-sec/" method="post">
+                {% csrf_token %}
+                    <!-- {{ formset.management_data }} -->
+
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8">
+					<div class="form-group">
+						<label for="Phone">First Name:</label>
+                         {{ form.first_name }}
+					</div>
+				 </div>
+			</div>
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8">
+					<div class="form-group">
+						<label for="Phone">Last Name:</label>
+						 {{ form.last_name }}
+					</div>
+				 </div>
+			</div>
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8">
+					<div class="form-group">
+						<label for="Phone">Username Name:</label>
+						 {{ form.username }}
+					</div>
+				 </div>
+			</div>
+
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8">
+					<div class="form-group">
+						<label for="Phone">Email:</label>
+						 {{ form.email }}
+					</div>
+				 </div>
+			</div>
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8">
+					<div class="form-group">
+						<label for="Phone">Password:</label>
+						 {{ form.password }}
+					</div>
+				 </div>
+			</div>
+			<div class="d-flex justify-content-center main_telnyx_sec">
+				 <div class="col-md-8">
+					<div class="form-group">
+						<label for="Phone">Confirm password:</label>
+						 {{ form.confirm_password }}
+					</div>
+				 </div>
+			</div>
+
+                <!--<div class="form-group m-form__group content">{{ formset.as_p }}</div>  -->
+                    <div class="m-login__form-action text-center">
+                        <button id="employee_register_btn" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                            Save
+                        </button>
+                    </div>
+            </form>
+		</div>
+	</div>
+	</div>
+<!-- end:: Page -->
+{% endblock %}
