@@ -5,20 +5,25 @@ from .models import User
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import signUp,loginform
+from .forms import signUp,loginform,employee_data_form
 from studio45_attendance_app import settings
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .import models
 from middleware.auth import auth_middleware
 from django.contrib.auth.hashers import make_password
-from datetime import datetime
-from datetime import timedelta
+# from datetime import datetime
+# from datetime import timedelta
 import uuid
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from .models import Employee_attendance_Model
+import datetime
 from datetime import date
 from datetime import datetime
+from django.views.generic import ListView,View
+from .models import Employee_attendance_Model
+from dateutil import parser
+
 
 
 def login(request):
@@ -32,6 +37,15 @@ def login(request):
             if user is not None:
                 auth_login(request, user)
                 request.session['user_id'] = user.id
+                try:
+                    obj = Employee_attendance_Model.objects.filter(user_id=request.user.id, start_date__isnull=False,
+                                                                   end_date=None, active=False).order_by('-id')[0]
+                    if date.today() != obj.start_date:
+                        Employee_attendance_Model.objects.filter(start_date=obj.start_date).update(active=True)
+                    else:
+                        pass
+                except:
+                    pass
                 response_data = {'url': settings.SITE_URL + "dashboard/",
                                  'message': 'login Successfully',
                                  'status': 'success'}
@@ -116,25 +130,13 @@ def employee_data_add(request):
     test1=request.session.get('test1', None)
 
     try:
-        add=Employee_attendance_Model.objects.get(user_id=request.user.id, start_date=str(date.today()))
+        add=Employee_attendance_Model.objects.get(user_id=request.user.id, start_date=date.today())
     except Employee_attendance_Model.DoesNotExist:
         add = None
     try:
-        test2 = Employee_attendance_Model.objects.get(user_id=request.user.id, start_date=str(date.today()), end_date=str(date.today()))
+        test2 = Employee_attendance_Model.objects.get(user_id=request.user.id, start_date=date.today(), end_date=date.today())
     except Employee_attendance_Model.DoesNotExist:
         test2 = None
-
-    # try:
-    #     test3 = Employee_attendance_Model.objects.get(start_date=str(date.today()), end_date=None)
-    #     print('hello')
-    #     add9=test3.start_date +' '+ test3.start_time
-    #     print(add9)
-    #     add10=str(datetime.now() + timedelta(hours=12))
-    #     print(add10)
-    #     if add9 > add10:
-    #         return HttpResponse('here')
-    # except Employee_attendance_Model.DoesNotExist:
-    #     pass
     role_condition = User.objects.get(id=request.user.id)
     role = ''
     print(role_condition.role)
@@ -147,7 +149,7 @@ def employee_data_add(request):
 
 def start_data_time_add(request):
     if request.is_ajax and request.method == "POST":
-        Employee_attendance_Model.objects.create(user_id=request.user.id, start_date= str(date.today()), start_time=str(datetime.now().time())).save()
+        Employee_attendance_Model.objects.create(user_id=request.user.id, start_date= date.today(), start_time=datetime.now().time()).save()
         request.session['test1']='read'
         response_data = {'message': 'start date time add successfully',
                          'status': 'success'}
@@ -156,7 +158,7 @@ def start_data_time_add(request):
 
 def end_data_time_add(request):
     if request.is_ajax and request.method == "POST":
-        Employee_attendance_Model.objects.filter(user_id=request.user.id).update(end_date=str(date.today()), end_time=str(datetime.now().time()), active=True)
+        Employee_attendance_Model.objects.filter(user_id=request.user.id,start_date= date.today()).update(end_date=date.today(), end_time=datetime.now().time(), active=False)
         request.session['test1'] = None
         response_data = {'message': 'start date time add successfully',
                          'status': 'success'}
@@ -214,3 +216,45 @@ def employee_register_sec(request):
     return render(request, 'employee_register.html',
                   {'page_title': page_title, 'url': url, 'user_logged_in': current_user, 'user_email': user_email,
                    'user_first_capital': user_first_capital,'role':role,'form':form})
+
+
+class Attendance_View(ListView):
+    model = Employee_attendance_Model
+    template_name = 'view_employee_data.html'
+    context_object_name = 'attendance'
+
+    def get_queryset(self):
+        filter_val = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
+        id = self.request.user.id
+        new_context = Employee_attendance_Model.objects.filter(start_date__range=(filter_val,end_date),user_id = id)
+        return new_context
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(Attendance_View, self).get_context_data(**kwargs)
+        context['start_date'] = self.request.GET.get('start_date')
+        context['end_date']=self.request.GET.get('end_date')
+        current_user = self.request.user.first_name
+        user_first_capital = self.request.user.first_name[0]
+        page_title = "Attendance details"
+        user_email = self.request.user.email
+        role_condition = User.objects.get(id=self.request.user.id)
+        role = ''
+        print(role_condition.role)
+        if role_condition.role == 'hr':
+            role = 1
+        print(role)
+        form = employee_data_form()
+        url = settings.SITE_URL
+        context['user_logged_in'] = current_user
+        context['page_title'] = page_title
+        context['user_email'] = user_email
+        context['user_first_capital'] = user_first_capital
+        context['role'] = role
+        context['form'] = form
+        context['url'] = url
+
+        return context
+
+
+

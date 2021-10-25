@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.views.static import serve
 from django.conf import settings
-from attendance.views import login,sign_up,logout,dashboard,employee_data_add,start_data_time_add,end_data_time_add,employee_register_sec
+from attendance.views import login,sign_up,logout,dashboard,employee_data_add,start_data_time_add,end_data_time_add,employee_register_sec,Attendance_View
 
 urlpatterns = [
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
@@ -32,5 +32,6 @@ urlpatterns = [
     path('start-data-time-add/', start_data_time_add, name='start_data_time_add'),
     path('end-data-time-add/', end_data_time_add, name='end_data_time_add'),
     path('employee-register-sec/', employee_register_sec, name='employee_register_sec'),
+    path('attendance-view/',  Attendance_View.as_view(), name='attendance-view'),
 
 ]

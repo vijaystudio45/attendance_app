@@ -16,7 +16,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     status = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default=None, null=False)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='hr')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
@@ -25,9 +25,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Employee_attendance_Model(models.Model):
     user_id = models.TextField(blank=True, null=True)
-    start_date = models.TextField(blank=True, null=True)
-    start_time = models.TextField(blank=True, null=True)
-    end_date = models.TextField(blank=True, null=True)
-    end_time = models.TextField(blank=True, null=True)
+    start_date = models.DateField(_(u"Employee Date"), blank=True, null=True)
+    start_time = models.TimeField(_(u"Employee Time"), blank=True, null=True)
+    end_date = models.DateField(_(u"Employee Date"), blank=True, null=True)
+    end_time = models.TimeField(_(u"Employee Time"), blank=True, null=True)
     active = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now=True)

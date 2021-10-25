@@ -35,7 +35,7 @@
 		<link href="{% static 'assets/vendors/base/vendors.bundle.css' %}" rel="stylesheet" type="text/css" />
 		<link href="{% static 'assets/demo/default/base/style.bundle.css' %}" rel="stylesheet" type="text/css" />
 		<!--end::Base Styles -->
-		<link rel="shortcut icon" href="{% static 'assets/app/media/img/logos/favicon.png' %}" />
+		<link rel="shortcut icon" href="{% static 'assets/app/media/img/logos/logo.png' %}" />
 	</head>
 	<!-- end::Head -->
     <!-- end::Body -->
@@ -229,6 +229,18 @@
 								</span>
 							</a>
 						</li>
+						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" >
+							<a  href="{{ url }}attendance-view/" class="m-menu__link ">
+								<i class="m-menu__link-icon flaticon-line-graph"></i>
+								<span class="m-menu__link-title">
+									<span class="m-menu__link-wrap">
+										<span class="m-menu__link-text">
+											Attendance Details
+										</span>
+									</span>
+								</span>
+							</a>
+						</li>
 						{% if role == 1 %}
 							<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" >
 								<a  href="{{ url }}employee-register-sec/" class="m-menu__link ">
@@ -325,6 +337,7 @@
 		<!--end::Page Snippets -->
 		<script src="{% static 'assets/demo/default/custom/components/datatables/base/data-local.js' %}" type="text/javascript"></script>
 		<script src="{% static 'custom.js' %}" type="text/javascript"></script>
+	    <script src="{% static 'assets/demo/default/custom/components/datatables/base/html-table.js' %}" type="text/javascript"></script>
 	</body>
 	<!-- end::Body -->
 </html>

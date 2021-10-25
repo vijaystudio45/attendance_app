@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'studio45_attendance_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'studio45_attendance_user',
+        'NAME': 'studio45_attendance_user_clone',
         'USER': 'postgres',
-        'PASSWORD': 'studio45#',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

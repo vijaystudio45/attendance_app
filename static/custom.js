@@ -150,3 +150,50 @@ $.ajax({
 //$(document).ready(function(){
 //    $('#end_date_btn').prop('disabled', true);
 //});
+
+$(document).ready(function() {
+   let todayDate = new Date().getDate();
+   let endD = new Date(new Date().setDate(todayDate));
+   $('#start_datepicker_id').datepicker({
+        format: 'yyyy-mm-dd',
+//      startDate : endD,
+//      weekStart: 7,
+//      todayBtn:  1,
+//      autoclose: 1,
+//      todayHighlight: 1,
+   });
+
+		//endDate(new Date());
+	});
+    $(document).ready(function() {
+	$('#start_datepicker_id').keypress(function(e) {
+			e.preventDefault();
+		});
+ $('#start_datepicker_id').bind('copy paste cut',function(e) {
+ e.preventDefault();
+ });
+});
+
+
+$(document).ready(function() {
+   let todayDate = new Date().getDate();
+   let endD = new Date(new Date().setDate(todayDate));
+   $('#end_datepicker_id').datepicker({
+      format: 'yyyy-mm-dd',
+      startDate : endD,
+      weekStart: 7,
+      todayBtn:  1,
+      autoclose: 1,
+      todayHighlight: 1,
+   });
+
+		//endDate(new Date());
+	});
+    $(document).ready(function() {
+	$('#end_datepicker_id').keypress(function(e) {
+			e.preventDefault();
+		});
+ $('#end_datepicker_id').bind('copy paste cut',function(e) {
+ e.preventDefault();
+ });
+});
